@@ -19,7 +19,7 @@ const AllComment = () => {
   return (
     <>
       <div className=" mt-7 border rounded-sm bg-white mb-10 p-4 shadow-lg">
-        <div className=" flex gap-3 mb-4 flex-col">
+        <div className=" flex gap-9 mb-4 flex-col">
           {comments.length > 0 ? (
             comments.map((curElm) => (
               <div key={_id} className=" flex gap-4">
@@ -32,7 +32,7 @@ const AllComment = () => {
                 <div className=" flex flex-col gap-1">
                   <div className=" flex gap-8">
                     <p className=" font-semibold">{curElm.user?.userName}</p>
-                    <p className=" text-gray-400">{new Date(curElm.createdAt).toLocaleString()}</p>
+                    <p className="text-sm md:text-[16px] text-gray-400 pt-[0.5px]">{new Date(curElm.createdAt).toLocaleString()}</p>
                   </div>
                   <div>
                     <p>{curElm.content}</p>

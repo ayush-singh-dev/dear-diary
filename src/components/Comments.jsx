@@ -37,11 +37,16 @@ const Comments = () => {
       console.error("cmt-error:", error);
     }
   };
+  const handlePost =()=>{
+    if(comment.length === 0){
+      toast.error("comment empty ")
+    }
+  }
 
   return (
     <>
       <div>
-        <h1 className=" text-3xl font-bold">{comments.length}-Comments</h1>
+        <h1 className=" text-3xl font-bold">{comments.length}{comments.length <= 1 ? "-Comment":"-Comments"}</h1>
       </div>
       <div className=" mt-6">
         <form onSubmit={handleSubmit}>
@@ -56,7 +61,7 @@ const Comments = () => {
               rows={7}
             />
             <div className="px-7 py-3 text-right ">
-              <button
+              <button onClick={handlePost}
                 className=" bg-purple-600 text-white font-semibold px-7 py-2 rounded-md
                hover:bg-purple-700 transition-colors duration-300"
               >

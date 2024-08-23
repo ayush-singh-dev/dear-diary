@@ -34,6 +34,8 @@ const SinglePost = () => {
   }, [id]);
 
   const likeHandle = async () => {
+    setLikes(true);
+      setLikesCount((prevCount) => prevCount + 1);
     try {
       const response = await fetch(`https://dear-diary-server.onrender.com/api/likePost/${id}`, {
         method: "PUT",
@@ -42,14 +44,20 @@ const SinglePost = () => {
           "Content-Type": "application/json",
         },
       });
+      if (!response.ok) {
+        throw new Error("Failed to like the post"); 
+      }
       const data = await response.json();
-      setLikes(true);
-      setLikesCount((prevCount) => prevCount + 1);
+      
     } catch (error) {
       console.error("like post error:", error);
+      setLikes(false); 
+      setLikesCount((prevCount) => prevCount - 1);
     }
   };
   const unlikeHandle = async () => {
+    setLikes(false);
+    setLikesCount((prevCount) => prevCount - 1);
     try {
       const response = await fetch(
         `https://dear-diary-server.onrender.com/api/unlikePost/${id}`,
@@ -61,12 +69,13 @@ const SinglePost = () => {
           },
         }
       );
-      const data = await response.json();
-      ("unikedPost-data:", data);
-      setLikes(false);
-      setLikesCount((prevCount) => prevCount - 1);
+      if (!response.ok) {
+        throw new Error("Failed to unlike the post");
+      }
     } catch (error) {
       console.error("unlike post error:", error);
+      setLikes(true);
+      setLikesCount((prevCount) => prevCount + 1);
     }
   };
 
@@ -86,16 +95,16 @@ const SinglePost = () => {
       </div>
       <div className=" w-[80%] m-auto">
         <div>
-          <h1 className=" text-center font-bold text-5xl mt-3 mb-4">{title}</h1>
+          <h1 className=" text-center font-bold text-4xl md:text-5xl mt-3 mb-6 md:mb-4">{title}</h1>
         </div>
         <div className=" flex justify-between ">
           <div className=" flex align-middle gap-28">
             <div>
-              <p className=" font-semibold mb-2">{authorName} </p>
-              <p className=" mb-5">{formattedDate}</p>
+              <p className=" font-semibold mb-2 mt-1">{authorName} </p>
+              <p className=" mb-5 text-[13px] md:text-sm text-slate-500">{formattedDate}</p>
             </div>
             <div className=" flex gap-2">
-              <p className="   pt-[6px]"> {likesCount}</p>
+              <span className="   pt-[6px]"> {likesCount}</span>
               {likes ? (
                 <i
                   onClick={unlikeHandle}

@@ -56,7 +56,7 @@ const UpdatePost = () => {
       [name]: value,
     });
 
-    // ("Updated post::::::", { ...post, [name]: value });
+    
   };
 
   const handleFileChange = (e) => {
@@ -157,7 +157,7 @@ const UpdatePost = () => {
         </div>
         <div>
           {loader ? (
-            <div className=" mt-8 text-center flex justify-center gap-1 bg-[#7E30E1] px-7 py-2  rounded-lg w-full ">
+            <div className=" mt-10 text-center flex justify-center gap-1 bg-[#7E30E1] px-7 py-2  rounded-lg w-full ">
               <ColorRing
                 visible={true}
                 height="35"

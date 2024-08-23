@@ -65,6 +65,7 @@ const AllPost = () => {
             <Post
               key={post._id}
               {...post}
+              currentUserId={user._id}
               onDelete={() => deletePost(post._id)}
             />
           ))}

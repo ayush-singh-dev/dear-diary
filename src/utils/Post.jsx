@@ -2,7 +2,7 @@ import React from "react";
 import { excerpt } from "./short";
 import { useNavigate } from "react-router-dom";
 import parse from 'html-react-parser';
-const Post = ({ _id, author, content, createdAt, file, title, onDelete }) => {
+const Post = ({ _id, author, content, createdAt, file, title,currentUserId, onDelete }) => {
   const navigate = useNavigate();
   const handlePage = () => {
     navigate(`/singlePost/${_id}`);
@@ -35,15 +35,19 @@ const Post = ({ _id, author, content, createdAt, file, title, onDelete }) => {
 
           <div className="mt-3 flex justify-between lg:flex lg:gap-12 lg:mt-4">
             <div>
-              <p className="">{author.userName}</p>
-              <p className=" text-gray-500">
+              <p className="font-semibold">{author.userName}</p>
+              <p className=" text-gray-500 text-[13px] mt-1 md:text-sm">
                 {new Date(createdAt).toLocaleString()}
               </p>
             </div>
             <div>
-              <button onClick={handleDelete} className=" flex  lg:hidden" >
-                <i className="fa-solid fa-trash text-[#e13033] text-2xl"></i>
-              </button>
+            { 
+              currentUserId === author._id && (
+                <button onClick={handleDelete} className="hidden lg:flex">
+                  <i className="fa-solid fa-trash text-[#e13033] text-2xl"></i>
+                </button>
+              )
+            }
             </div>
           </div>
           <div className=" mt-3 lg:mt-4">
