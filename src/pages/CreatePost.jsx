@@ -124,7 +124,7 @@ const CreatePost = () => {
         </div>
         <div>
           {loader ? (
-            <div className=" mt-10 text-center flex justify-center gap-1 bg-[#7E30E1] px-7 py-2  rounded-lg w-full ">
+            <div className="mt-24 md:mt-10 text-center flex justify-center gap-1 bg-[#7E30E1] px-7 py-2  rounded-lg w-full ">
               <ColorRing
                 visible={true}
                 height="35"
@@ -139,7 +139,7 @@ const CreatePost = () => {
               </span>
             </div>
           ) : (
-            <button className=" mt-8 bg-[#7E30E1] px-7 py-2 text-white rounded-lg w-full ">
+            <button className=" mt-24 md:mt-10 bg-[#7E30E1] px-7 py-2 text-white rounded-lg w-full ">
               Create Post
             </button>
           )}

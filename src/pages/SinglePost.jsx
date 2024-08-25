@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../store/UserContext";
 import Comments from "../components/Comments";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 
 const SinglePost = () => {
-  const { post, setPost } = useAuth();
+  const { post, setPost, user } = useAuth();
   const [likes, setLikes] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
 
@@ -35,23 +35,24 @@ const SinglePost = () => {
 
   const likeHandle = async () => {
     setLikes(true);
-      setLikesCount((prevCount) => prevCount + 1);
+    setLikesCount((prevCount) => prevCount + 1);
     try {
-      const response = await fetch(`https://dear-diary-server.onrender.com/api/likePost/${id}`, {
-        method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `https://dear-diary-server.onrender.com/api/likePost/${id}`,
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (!response.ok) {
-        throw new Error("Failed to like the post"); 
+        throw new Error("Failed to like the post");
       }
-      const data = await response.json();
-      
     } catch (error) {
       console.error("like post error:", error);
-      setLikes(false); 
+      setLikes(false);
       setLikesCount((prevCount) => prevCount - 1);
     }
   };
@@ -95,13 +96,17 @@ const SinglePost = () => {
       </div>
       <div className=" w-[80%] m-auto">
         <div>
-          <h1 className=" text-center font-bold text-4xl md:text-5xl mt-3 mb-6 md:mb-4">{title}</h1>
+          <h1 className=" text-center font-bold text-4xl md:text-5xl mt-3 mb-6 md:mb-4">
+            {title}
+          </h1>
         </div>
         <div className=" flex justify-between ">
           <div className=" flex align-middle gap-28">
             <div>
               <p className=" font-semibold mb-2 mt-1">{authorName} </p>
-              <p className=" mb-5 text-[13px] md:text-sm text-slate-500">{formattedDate}</p>
+              <p className=" mb-5 text-[13px] md:text-sm text-slate-500">
+                {formattedDate}
+              </p>
             </div>
             <div className=" flex gap-2">
               <span className="   pt-[6px]"> {likesCount}</span>
@@ -120,15 +125,15 @@ const SinglePost = () => {
           </div>
 
           <div>
-            <Link to={`/updatePost/${_id}`}>
-              <i className="fa-solid fa-pen-to-square text-[#7E30E1] text-2xl"></i>
-            </Link>
+            {user && user_id === author?._id && (
+              <Link to={`/updatePost/${_id}`}>
+                <i className="fa-solid fa-pen-to-square text-[#7E30E1] text-2xl"></i>
+              </Link>
+            )}
           </div>
         </div>
 
-        <div>
-        {content ? parse(content) : null}
-        </div>
+        <div>{content ? parse(content) : null}</div>
         <hr className=" mt-9" />
         <div className=" mt-8">
           <Comments />

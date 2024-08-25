@@ -18,9 +18,7 @@ const AllPost = () => {
     }
   };
 
-  useEffect(() => {
-    fetchPost();
-  }, []);
+ 
 
   const deletePost = async (id) => {
     try {
@@ -44,6 +42,10 @@ const AllPost = () => {
       console.error("delete post error:", error);
     }
   };
+
+  useEffect(() => {
+    fetchPost();
+  }, [deletePost]);
   const username = user?.userName || "Guest";
 
   return (

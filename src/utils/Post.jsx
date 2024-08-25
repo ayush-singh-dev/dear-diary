@@ -28,9 +28,13 @@ const Post = ({ _id, author, content, createdAt, file, title,currentUserId, onDe
         <div className=" w-full">
           <div className=" mt-4 lg:flex lg:flex-shrink lg:gap-24 lg:mt-6">
             <h2 className="text-center font-bold text-4xl lg:text-left">{title}</h2>
-            <button onClick={handleDelete} className=" hidden  lg:flex">
-              <i className="fa-solid fa-trash text-[#e13033] text-2xl"></i>
-            </button>
+            { 
+              currentUserId === author._id && (
+                <button onClick={handleDelete} className="hidden lg:flex">
+                  <i className="fa-solid fa-trash text-[#e13033] text-2xl"></i>
+                </button>
+              )
+            }
           </div>
 
           <div className="mt-3 flex justify-between lg:flex lg:gap-12 lg:mt-4">
@@ -43,7 +47,7 @@ const Post = ({ _id, author, content, createdAt, file, title,currentUserId, onDe
             <div>
             { 
               currentUserId === author._id && (
-                <button onClick={handleDelete} className="hidden lg:flex">
+                <button onClick={handleDelete} className="flex lg:hidden">
                   <i className="fa-solid fa-trash text-[#e13033] text-2xl"></i>
                 </button>
               )
