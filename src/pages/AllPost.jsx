@@ -57,7 +57,7 @@ const AllPost = () => {
       </div>
       {allPost.length === 0 ? (
         <div className=" h-[25rem] text-center flex justify-center overflow-hidden items-center">
-          <h1 className=" text-3xl font-bold ">
+          <h1 className=" text-2xl mg:text-3xl font-bold ">
             You have no post yet. Create one!
           </h1>
         </div>
