@@ -125,7 +125,7 @@ const SinglePost = () => {
           </div>
 
           <div>
-            {user && user_id === author?._id && (
+            {user && user._id === author?._id && (
               <Link to={`/updatePost/${_id}`}>
                 <i className="fa-solid fa-pen-to-square text-[#7E30E1] text-2xl"></i>
               </Link>
